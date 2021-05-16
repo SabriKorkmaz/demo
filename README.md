@@ -1,6 +1,8 @@
 # SWE-573---Software-Development-Practice-Repo
-This is a repo that created for SWE-573 course of Software Engineering Master Program in Bogazici University 
+This is a repo that created for SWE-573 course of Software Engineering Master Program in Bogazici University.  
 
-Details of the repository will be determined in the next weeks. 
+In this project we aim to develop a web application which will enable users to search and tag documents from Pubmed database, which is a database that stores thousands of documents in medical domain.  
 
-Weekly progress can be tracked in <a href="https://github.com/kenankural/SWE-573---Software-Development-Practice-Repo/wiki">Wiki</a> page.
+Project doumentation and weekly progress can be tracked in <a href="https://github.com/kenankural/SWE-573---Software-Development-Practice-Repo/wiki">Wiki</a> page.
+
+Hope that you enjoy it!
