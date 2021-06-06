@@ -1,5 +1,28 @@
-{%extends 'base.html'%}
+{% extends 'base.html' %}
+
+{% block title %}
+Search
+{% endblock %}
 
 {% block content %}
-<h1>Search Page</h1>
-{% endblock content %}
+<script type="text/javascript" src="/static/search.js"></script>
+
+    <div class="row ">
+        <div class="col-md-4 col-md-offset-4 text-center">
+            <h1>AskMedical</h1>
+        </div>
+    </div>
+   {% if q %}
+    <h1>Articles containing "{{ q }}"</h1>
+    <p>
+        {% with results.count as total_results %}
+        Found {{ total_results }} result{{ total_results|pluralize }}
+        {% endwith %}
+    </p>
+    {% endif %}
+    <form method="get">
+        {{ form.as_p }}
+        <input class="btn btn-primary my-1" type="submit" value="Search">
+    </form>
+
+{% endblock %}
