@@ -1,0 +1,24 @@
+from django.db import models
+
+# Create your models here.
+
+class Article(models.Model):
+    abstract = models.TextField(null=True)
+    PM_id = models.IntegerField(primary_key=True)
+    title = models.TextField()
+    keywords = models.TextField()
+
+
+    def __str__(self):
+        return str(self.PM_id)
+
+class Sentence(models.Model):
+    id = models.AutoField(primary_key=True)
+    article = models.ForeignKey(Article,on_delete=models.CASCADE)
+    type = models.TextField()
+    sentence = models.TextField()
+
+    def __str__(self):
+        return self.sentence
+
+

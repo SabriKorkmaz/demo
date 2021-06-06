@@ -1,0 +1,9 @@
+#Python compiled files
+*.pyc
+
+#Virtual environment, already have in requirements, no need to track
+venv/
+
+#Pycharm ide files
+.idea/
+
