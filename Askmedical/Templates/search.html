@@ -19,10 +19,21 @@ Search
         Found {{ total_results }} result{{ total_results|pluralize }}
         {% endwith %}
     </p>
-    {% endif %}
+
+
+    {%for post in results %}
+    <h5><a href="{{ post.get_absolute_url }}">{{post.title}}</a></h5>
+    {% empty %}
+    <p>There is no articles matches with your search. </p>
+    {% endfor %}
+    <p><a href="{% url "post_search" %}" class="btn btn-primary" role="button" aria-disabled="true">New
+            Search</a>
+    </p>
+    {% else %}
+
     <form method="get">
         {{ form.as_p }}
         <input class="btn btn-primary my-1" type="submit" value="Search">
     </form>
-
+   {% endif %}
 {% endblock %}
