@@ -26,7 +26,7 @@ def post_search(request):
         #we put this for security issues
         if form.is_valid():
             q = form.cleaned_data['q']
-            results =Article.objects.filter(title__contains=q)
+            results =Article.objects.filter(title__icontains=q)
 
     return render(request, 'search.html',
                   {'form':form,

@@ -61,6 +61,15 @@ def DatabasePopulationforArticles(articles):
         except:
             pass
 
+        # authors =""
+        # try:
+        #     listofAuthors = articleVar['MedlineCitation']['Article']['AuthorList']
+        #     for author in listofAuthors[0]:
+        #         authors += (str(author) + "; ")
+        # except:
+        #     pass
+
+
         article = Article(abstract= abstract,title=title, PM_id=PM_id, keywords=keywords)
         article.save()
 
@@ -100,5 +109,5 @@ def Populate(searchTerm,totalSize,fetchSize):
     articles = temp2['PubmedArticle']
     DatabasePopulationforArticles(articles)
 
-Populate("influenza",10001, 1000)
+Populate("influenza",10, 20)
 

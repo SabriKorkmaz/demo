@@ -8,7 +8,6 @@ class Article(models.Model):
     title = models.TextField()
     keywords = models.TextField()
 
-
     def __str__(self):
         return str(self.PM_id)
 

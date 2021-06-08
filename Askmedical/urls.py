@@ -3,6 +3,6 @@ from . import views
 from .views import MainpageView
 from .views import post_search
 urlpatterns=[
-    path('', MainpageView.as_view(), name='Mainpage'),
+    path('', post_search, name='post_search'),
     path('search/', post_search, name='post_search'),
 ]
