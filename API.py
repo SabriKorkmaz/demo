@@ -2,6 +2,7 @@
 import os
 import django
 import numpy,re
+import datetime
 
 #In order to get database and other settings of the project for my script
 os.environ.setdefault("DJANGO_SETTINGS_MODULE","AskMedicalProject.settings")
@@ -33,6 +34,7 @@ pickle_det = nltk.data.load('tokenizers/punkt/english.pickle')
 #This tokenizer divides a text into a list of sentences,
 # by using an unsupervised algorithm to build a model for abbreviation words,
 # collocations, and words that start sentences.
+
 def DatabasePopulationforArticles(articles):
     for articleVar in articles:
         #Here I am getting the title, PM id and abstract by using XML tags.
@@ -60,17 +62,27 @@ def DatabasePopulationforArticles(articles):
                 keywords += (str(keyword) + "; ")
         except:
             pass
+        try:
+            authors =""
+            listofAuthors = articleVar['MedlineCitation']['Article']['AuthorList']
+            for author in listofAuthors:
+                authors += (str(author['ForeName']) + " " + str(author['LastName'] + ";"))
+            authors=authors.strip(";")
+        except:
+            pass
 
-        # authors =""
-        # try:
-        #     listofAuthors = articleVar['MedlineCitation']['Article']['AuthorList']
-        #     for author in listofAuthors[0]:
-        #         authors += (str(author) + "; ")
-        # except:
-        #     pass
+        pubdate = ""
+        try:
 
+            pubdatelist= articleVar['PubmedData']['History']
+            pubdate = pubdatelist[0]['Year'] + "-" + pubdatelist[0]['Month'] + "-" + pubdatelist[0]['Day']
+      #      print("İlk tarih" + pubdate)
+            pubdate = datetime.datetime.strptime(pubdate, '%Y-%m-%d %H:%M')
+     #       print("İlk tarih" + pubdate)
+        except:
+            pass
 
-        article = Article(abstract= abstract,title=title, PM_id=PM_id, keywords=keywords)
+        article = Article(abstract= abstract,title=title, PM_id=PM_id, keywords=keywords, authors=authors, publication_date=pubdate)
         article.save()
 
         sentence_var = title
@@ -109,5 +121,5 @@ def Populate(searchTerm,totalSize,fetchSize):
     articles = temp2['PubmedArticle']
     DatabasePopulationforArticles(articles)
 
-Populate("influenza",10, 20)
+Populate("influenza",500, 1000)
 

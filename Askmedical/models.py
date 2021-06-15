@@ -5,8 +5,10 @@ from django.db import models
 class Article(models.Model):
     abstract = models.TextField(null=True)
     PM_id = models.IntegerField(primary_key=True)
-    title = models.TextField()
-    keywords = models.TextField()
+    title = models.TextField(null=True)
+    keywords = models.TextField(null=True)
+    authors = models.TextField(null=True)
+    publication_date = models.DateField(null=True)
 
     def __str__(self):
         return str(self.PM_id)

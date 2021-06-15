@@ -8,7 +8,7 @@
 
    {% if q %}
 
-    <div class="p-3 mb-2 bg-dark text-white">
+    <div class="p-3 mb-2 bg-info text-white">
         {% with results.count as total_results %}
         {{ total_results }} article{{ total_results|pluralize }} found which contains "{{ q }}"
         {% endwith %}
@@ -19,12 +19,18 @@
     <div class="card">
       <div class="card-header">
         <p class="font-weight-bold">Title:</p> {{post.title}}
+          <p class="font-weight-bold">Authors:</p> {{post.authors}}
+          <p class="font-weight-bold">Date of Publication:</p> {{post.publication_date}}
       </div>
       <div class="card-body">
           <p class="font-weight-bold">Abstract:</p>
         <p class="card-text">{{post.abstract}}</p>
         <a href="#" class="btn btn-primary">Tag</a>
       </div>
+              <div class="card-header">
+        <p class="font-weight-bold">Keywords:</p> {{post.keywords}}
+      </div>
+        <hr size="10" width="100%" color="black">
     </div>
     {% empty %}
     <p>There is no articles matches with your search. </p>
@@ -34,10 +40,11 @@
     </p>
 
     {% else %}
-    <h3>
+    <h3 >
       Search
       <small class="text-muted">articles now!</small>
     </h3>
+
 
     <form method="get">
         {{ form.as_p }}
