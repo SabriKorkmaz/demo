@@ -11,54 +11,53 @@ from .forms import Search_Form, CreateUserForm
 # Views are used to indicate what I will have in my page.
 
 def registerPage(request):
-    form= CreateUserForm()
+    if request.user.is_authenticated:
+        return redirect('post_search')
+    else:
 
-    if request.method == 'POST':
-        form = CreateUserForm(request.POST)
-        if form.is_valid():
-            form.save()
-            user = form.cleaned_data.get('username')
-            messages.success(request, 'Askmedical account is created for ' + user)
-            return redirect('login')
+        form= CreateUserForm()
+        if request.method == 'POST':
+                form = CreateUserForm(request.POST)
+                if form.is_valid():
+                    form.save()
+                    user = form.cleaned_data.get('username')
+                    messages.success(request, 'Askmedical account is created for ' + user)
+                    return redirect('login')
 
-    context={'form':form}
-    return render(request, 'accounts/register.html', context)
+        context={'form':form}
+        return render(request, 'accounts/register.html', context)
 
 def loginPage(request):
 
-    if request.method == 'POST':
-        username = request.POST.get('username')
-        password = request.POST.get('password')
+    if request.user.is_authenticated:
+        return redirect('post_search')
+    else:
 
-        user = authenticate(request, username=username, password=password)
+        if request.method == 'POST':
+            username = request.POST.get('username')
+            password = request.POST.get('password')
 
-        if user is not None:
-            login(request, user)
-            return redirect('post_search')
-        else:
-            messages.info(request, 'Please check your credentials')
+            user = authenticate(request, username=username, password=password)
 
-    context={}
-    return render(request, 'accounts/login.html', context)
+            if user is not None:
+                login(request, user)
+                return redirect('post_search')
+            else:
+                messages.info(request, 'Please check your credentials')
 
+        context={}
+        return render(request, 'accounts/login.html', context)
+
+@login_required(login_url='login')
 def logoutUser(request):
 	logout(request)
 	return redirect('login')
 
-
-def index(request):
-    obj= Article.objects.all()
-    context={
-        "obj":obj,
-    }
-    return render(request, "results.html", context)
-
-class MainpageView(TemplateView):
-    template_name = 'home.html'
-
+@login_required(login_url='login')
 def Tagfeature(request):
     return render(request, 'tagpage.html')
 
+@login_required(login_url='login')
 def post_search(request):
 
     form = Search_Form()
@@ -78,6 +77,7 @@ def post_search(request):
                    'q':q,
                    'results': results})
 
+@login_required(login_url='login')
 def detailpage(request, articleid):
     article = Article.objects.get(pk=articleid)
 
