@@ -18,8 +18,7 @@
     {%for post in results %}
     <div class="card">
       <div class="card-header">
-          <a href="{% url 'detailpage' post.articleid %}">{{ post.articleid }}</a>
-        <p class="font-weight-bold">Title:</p> {{post.title}}
+          <a href="{% url 'detailpage' post.articleid %}">{{ post.title }}</a>
           <p class="font-weight-bold">Authors:</p> {{post.authors}}
           <p class="font-weight-bold">Date of Publication:</p> {{post.publication_date}}
       </div>

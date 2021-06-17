@@ -1,9 +1,50 @@
-from django.shortcuts import render, get_object_or_404
+from django.shortcuts import render, redirect
 from django.views.generic import TemplateView
+from django.contrib import messages
+from django.contrib.auth import authenticate, login, logout
+from django.contrib.auth.decorators import login_required
+from django.contrib.auth.forms import UserCreationForm
+
 from .models import Article
-from .forms import Search_Form
+from .forms import Search_Form, CreateUserForm
 
 # Views are used to indicate what I will have in my page.
+
+def registerPage(request):
+    form= CreateUserForm()
+
+    if request.method == 'POST':
+        form = CreateUserForm(request.POST)
+        if form.is_valid():
+            form.save()
+            user = form.cleaned_data.get('username')
+            messages.success(request, 'Askmedical account is created for ' + user)
+            return redirect('login')
+
+    context={'form':form}
+    return render(request, 'accounts/register.html', context)
+
+def loginPage(request):
+
+    if request.method == 'POST':
+        username = request.POST.get('username')
+        password = request.POST.get('password')
+
+        user = authenticate(request, username=username, password=password)
+
+        if user is not None:
+            login(request, user)
+            return redirect('post_search')
+        else:
+            messages.info(request, 'Please check your credentials')
+
+    context={}
+    return render(request, 'accounts/login.html', context)
+
+def logoutUser(request):
+	logout(request)
+	return redirect('login')
+
 
 def index(request):
     obj= Article.objects.all()
