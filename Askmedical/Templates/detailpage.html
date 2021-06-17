@@ -7,17 +7,17 @@
 
     <div class="card">
       <div class="card-header">
-        <p class="font-weight-bold">Title:</p> {{article.title}}
-          <p class="font-weight-bold">Authors:</p> {article.authors}}
-          <p class="font-weight-bold">Date of Publication:</p> {{article.publication_date}}
+        <p class="font-weight-bold">Title:</p> {{title}}
+          <p class="font-weight-bold">Authors:</p> {authors}}
+          <p class="font-weight-bold">Date of Publication:</p> {{pubdate}}
       </div>
       <div class="card-body">
           <p class="font-weight-bold">Abstract:</p>
-        <p class="card-text">{{article.abstract}}</p>
+        <p class="card-text">{{abstract}}</p>
         <a href="{% url "Tagfeature" %}" class="btn btn-primary">Tag</a>
       </div>
               <div class="card-header">
-        <p class="font-weight-bold">Keywords:</p> {{article.keywords}}
+        <p class="font-weight-bold">Keywords:</p> {{keywords}}
       </div>
         <hr size="10" width="100%" color="black">
     </div>

@@ -37,9 +37,8 @@ def post_search(request):
                    'q':q,
                    'results': results})
 
-def detailpage(request, PM_id):
-    article = Article.objects.get(pk=PM_id)
-    #article = get_object_or_404(Article, pk=PM_id)
+def detailpage(request, articleid):
+    article = Article.objects.get(pk=articleid)
 
     demonstrate = {
                     "authors": article.authors,
@@ -52,5 +51,5 @@ def detailpage(request, PM_id):
                     "article":article
                     }
 
-    return render(request, 'detailpage.html', {'article': article})
+    return render(request, 'detailpage.html', context=demonstrate)
 

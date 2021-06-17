@@ -10,8 +10,9 @@ class Tag(models.Model):
         return str(self.name)
 
 class Article(models.Model):
+    articleid=models.AutoField(primary_key=True)
     abstract = models.TextField(null=True)
-    PM_id = models.IntegerField(primary_key=True)
+    PM_id = models.IntegerField(null=True)
     title = models.TextField(null=True)
     keywords = models.TextField(null=True)
     authors = models.TextField(null=True)
@@ -19,7 +20,7 @@ class Article(models.Model):
     tags= models.ManyToManyField(Tag)
 
     def __str__(self):
-        return str(self.PM_id)
+        return str(self.articleid)
 
 class Sentence(models.Model):
     id = models.AutoField(primary_key=True)

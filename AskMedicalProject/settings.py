@@ -77,8 +77,8 @@ WSGI_APPLICATION = 'AskMedicalProject.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'deneme1',
-        'USER': 'deneme1',
+        'NAME': 'pubdb1',
+        'USER': 'pubdb1',
         'PASSWORD': 'kenan123',
         'HOST': 'db',
         'PORT': 5432
