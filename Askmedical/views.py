@@ -1,4 +1,4 @@
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.views.generic import TemplateView
 from .models import Article
 from .forms import Search_Form
@@ -15,7 +15,11 @@ def index(request):
 class MainpageView(TemplateView):
     template_name = 'home.html'
 
+def Tagfeature(request):
+    return render(request, 'tagpage.html')
+
 def post_search(request):
+
     form = Search_Form()
     # q is the input that user typed
     q = ''
@@ -32,3 +36,21 @@ def post_search(request):
                   {'form':form,
                    'q':q,
                    'results': results})
+
+def detailpage(request, PM_id):
+    article = Article.objects.get(pk=PM_id)
+    #article = get_object_or_404(Article, pk=PM_id)
+
+    demonstrate = {
+                    "authors": article.authors,
+                    "title": article.title,
+                    "abstract": article.abstract,
+                    "pmid": article.PM_id,
+                    "keywords": article.keywords,
+                    "tags": article.tags,
+                    "pubdate": article.publication_date,
+                    "article":article
+                    }
+
+    return render(request, 'detailpage.html', {'article': article})
+

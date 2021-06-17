@@ -2,6 +2,13 @@ from django.db import models
 
 # Create your models here.
 
+class Tag(models.Model):
+    name= models.CharField(max_length=200, null=True)
+    taglink= models.CharField(max_length=400, null=True)
+
+    def __str__(self):
+        return str(self.name)
+
 class Article(models.Model):
     abstract = models.TextField(null=True)
     PM_id = models.IntegerField(primary_key=True)
@@ -9,6 +16,7 @@ class Article(models.Model):
     keywords = models.TextField(null=True)
     authors = models.TextField(null=True)
     publication_date = models.DateField(null=True)
+    tags= models.ManyToManyField(Tag)
 
     def __str__(self):
         return str(self.PM_id)
