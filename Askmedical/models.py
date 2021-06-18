@@ -17,7 +17,7 @@ class Article(models.Model):
     keywords = models.TextField(null=True)
     authors = models.TextField(null=True)
     publication_date = models.DateField(null=True)
-    tags= models.ManyToManyField(Tag)
+    tags= models.ManyToManyField(Tag, blank=True, null=True)
 
     def __str__(self):
         return str(self.articleid)

@@ -6,7 +6,7 @@ from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
 from .models import Article
-from .forms import Search_Form, CreateUserForm
+from .forms import Search_Form, CreateUserForm, TagForm
 
 # Views are used to indicate what I will have in my page.
 
@@ -54,8 +54,19 @@ def logoutUser(request):
 	return redirect('login')
 
 @login_required(login_url='login')
-def Tagfeature(request):
-    return render(request, 'tagpage.html')
+def Tagfeature(request, articleid):
+    article = Article.objects.get(pk=articleid)
+    if request.method == 'POST':
+        form = TagForm(request.POST)
+        if form.is_valid():
+            form.save()
+            form = TagForm()
+    else:
+            form = TagForm
+    context = {
+        'form':form
+    }
+    return render(request, 'tagpage.html', context)
 
 @login_required(login_url='login')
 def post_search(request):
