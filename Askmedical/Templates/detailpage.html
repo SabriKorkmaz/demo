@@ -8,9 +8,9 @@
 
     <div class="card">
       <div class="card-header">
-        <p class="font-weight-bold">Title: {{title}}</p>
-          <p class="font-weight-bold">Authors: {{authors}}</p>
-          <p class="font-weight-lighter">Date of Publication: {{pubdate}}</p>
+        <p class="font-weight-bold"><h3><strong>Title:</strong>  {{title}}</h3></p>
+          <p class="font-weight-normal"><strong>Authors:</strong> <em>{{authors}}</em></p>
+          <p class="font-weight-lighter"><strong>Date of Publication:</strong> <em>{{pubdate}}</em></p>
           <p class="font-weight-lighter">Keywords: {{keywords}}</p>
           <a href="{% url 'tagpage' article.articleid %}">  <p class="font-weight-bold">Tag this article</p></a>
           <p class="font-weight-bold">Already added tags for this article:

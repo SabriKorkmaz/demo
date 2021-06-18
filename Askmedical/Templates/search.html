@@ -19,9 +19,9 @@
     {%for post in results %}
     <div class="card">
       <div class="card-header">
-          <a href="{% url 'detailpage' post.articleid %}">Title: {{ post.title }}</a>
-          <p class="font-weight-bold">Authors: {{post.authors}}</p>
-          <p class="font-weight-lighter">Date of Publication: {{post.publication_date}}</p>
+          <a href="{% url 'detailpage' post.articleid %}"><h3><strong>Title:</strong> {{ post.title }}</h3></a>
+          <p class="font-weight-bold"><strong>Authors:</strong> <em>{{post.authors}}</em></p>
+          <p class="font-weight-lighter"><strong>Date of Publication:</strong> <em> {{post.publication_date}}</em></p>
           <p class="font-weight-lighter">Keywords: {{post.keywords}}</p>
           <a href="{% url 'detailpage' post.articleid %}">View details and Tag</a>
 
