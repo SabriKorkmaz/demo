@@ -8,6 +8,7 @@
 
    {% if q %}
 
+
     <div class="p-3 mb-2 bg-info text-white">
         {% with results.count as total_results %}
         {{ total_results }} article{{ total_results|pluralize }} found which contains "{{ q }}"
@@ -18,21 +19,32 @@
     {%for post in results %}
     <div class="card">
       <div class="card-header">
-          <a href="{% url 'detailpage' post.articleid %}">{{ post.title }}</a>
-          <p class="font-weight-bold">Authors:</p> {{post.authors}}
-          <p class="font-weight-bold">Date of Publication:</p> {{post.publication_date}}
+          <a href="{% url 'detailpage' post.articleid %}">Title: {{ post.title }}</a>
+          <p class="font-weight-bold">Authors: {{post.authors}}</p>
+          <p class="font-weight-lighter">Date of Publication: {{post.publication_date}}</p>
+          <p class="font-weight-lighter">Keywords: {{post.keywords}}</p>
+          <a href="{% url 'detailpage' post.articleid %}">View details and Tag</a>
+
+          <p class="font-weight-bold">Already added tags for this article:
+            {% for tag_fields in post.tags.all %}
+                  <a href="{{ tag_fields.taglink }}">{{tag_fields.name}},</a>
+            {% endfor %}
+
       </div>
       <div class="card-body">
           <p class="font-weight-bold">Abstract:</p>
           <p class="card-text">{{post.abstract}}</p>
       </div>
-      <div class="card-header">
-          <p class="font-weight-bold">Keywords:</p> {{post.keywords}}
-            {% for tagfields in post.tags.all %}
-                  <p class="font-weight-bold">Tags:</p> {{tagfields.name}}
-            {% endfor %}
-      </div>
-        <hr size="10" width="100%" color="black">
+    <style>
+      hr {
+        width: 100%;
+        height: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #b7d0e2;
+      }
+    </style>
+        <hr />
     </div>
     {% empty %}
     <p>There is no articles matches with your search. </p>

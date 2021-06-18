@@ -9,4 +9,5 @@ urlpatterns=[
     path('search/', post_search, name='post_search'),
     path('detailpage/<int:articleid>', views.detailpage, name='detailpage'),
     path('tagpage/<int:articleid>', Tagfeature, name='tagpage'),
+
 ]

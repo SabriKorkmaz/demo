@@ -8,28 +8,33 @@
 
     <div class="card">
       <div class="card-header">
-        <p class="font-weight-bold">Title:</p> {{title}}
-          <p class="font-weight-bold">Authors:</p> {{authors}}
-          <p class="font-weight-bold">Date of Publication:</p> {{pubdate}}
+        <p class="font-weight-bold">Title: {{title}}</p>
+          <p class="font-weight-bold">Authors: {{authors}}</p>
+          <p class="font-weight-lighter">Date of Publication: {{pubdate}}</p>
+          <p class="font-weight-lighter">Keywords: {{keywords}}</p>
+          <a href="{% url 'tagpage' article.articleid %}">  <p class="font-weight-bold">Tag this article</p></a>
+          <p class="font-weight-bold">Already added tags for this article:
+            {% for tag_fields in article.tags.all %}
+                  <a href="{{ tag_fields.taglink }}">{{tag_fields.name}},</a>
+            {% endfor %}
+          </p>
       </div>
       <div class="card-body">
           <p class="font-weight-bold">Abstract:</p>
-        <p class="card-text">{{abstract}}</p>
+        <p class="font-weight-normal">{{abstract}}</p>
 
       </div>
-              <div class="card-header">
-        <p class="font-weight-bold">Keywords:</p> {{keywords}}
 
-            {% for tag_fields in article.tags.all %}
-                  <p class="font-weight-bold">Tags:</p> {{tag_fields.name}}
-                  <p class="font-weight-bold">Tags:</p> {{tag_fields.taglink}}
-
-            {% endfor %}
-
-
-      </div>
-        <a href="{% url 'tagpage' article.articleid %}"> Tag the Article</a>
-        <hr size="10" width="100%" color="black">
+         <style>
+      hr {
+        width: 100%;
+        height: 30px;
+        margin-left: auto;
+        margin-right: auto;
+        background-color: #b7d0e2;
+      }
+    </style>
+        <hr />
     </div>
 
 {% endblock %}

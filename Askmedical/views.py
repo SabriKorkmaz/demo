@@ -1,4 +1,5 @@
 from django.shortcuts import render, redirect
+from django.http import HttpResponse
 from django.views.generic import TemplateView
 from django.contrib import messages
 from django.contrib.auth import authenticate, login, logout
@@ -60,15 +61,19 @@ def Tagfeature(request, articleid):
         form = TagForm(request.POST)
         if form.is_valid():
             form.save()
-            tag = Tag.objects.latest('name')
+            tag = Tag.objects.latest('id')
             article.tags.add(tag)
             form = TagForm()
+            messages.info(request, 'Congrats')
+            return redirect('post_search')
+
     else:
             form = TagForm
     context = {
         'form':form
     }
     return render(request, 'tagpage.html', context)
+
 
 @login_required(login_url='login')
 def post_search(request):
