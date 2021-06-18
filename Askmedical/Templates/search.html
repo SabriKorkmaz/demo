@@ -24,10 +24,13 @@
       </div>
       <div class="card-body">
           <p class="font-weight-bold">Abstract:</p>
-        <p class="card-text">{{post.abstract}}</p>
+          <p class="card-text">{{post.abstract}}</p>
       </div>
-              <div class="card-header">
-        <p class="font-weight-bold">Keywords:</p> {{post.keywords}}
+      <div class="card-header">
+          <p class="font-weight-bold">Keywords:</p> {{post.keywords}}
+            {% for tagfields in post.tags.all %}
+                  <p class="font-weight-bold">Tags:</p> {{tagfields.name}}
+            {% endfor %}
       </div>
         <hr size="10" width="100%" color="black">
     </div>

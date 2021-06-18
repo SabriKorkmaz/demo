@@ -6,7 +6,7 @@
 
 {% block content %}
 
-<form action="/tagpage" method="post">
+<form method="POST">
     {% csrf_token %}
 
     {{ form }}

@@ -5,7 +5,7 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.decorators import login_required
 from django.contrib.auth.forms import UserCreationForm
 
-from .models import Article
+from .models import Article, Tag
 from .forms import Search_Form, CreateUserForm, TagForm
 
 # Views are used to indicate what I will have in my page.
@@ -60,6 +60,8 @@ def Tagfeature(request, articleid):
         form = TagForm(request.POST)
         if form.is_valid():
             form.save()
+            tag = Tag.objects.latest('name')
+            article.tags.add(tag)
             form = TagForm()
     else:
             form = TagForm
@@ -100,7 +102,7 @@ def detailpage(request, articleid):
                     "keywords": article.keywords,
                     "tags": article.tags,
                     "pubdate": article.publication_date,
-                    "article":article
+                    "article":article,
                     }
 
     return render(request, 'detailpage.html', context=demonstrate)
