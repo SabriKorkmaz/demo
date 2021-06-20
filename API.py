@@ -121,5 +121,5 @@ def Populate(searchTerm,totalSize,fetchSize):
     articles = temp2['PubmedArticle']
     DatabasePopulationforArticles(articles)
 
-Populate("influenza",100, 200)
+#Populate("influenza",44000, 54000)
 

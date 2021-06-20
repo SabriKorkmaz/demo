@@ -6,7 +6,10 @@ services:
     ports:
       - "5432:5432"
     environment:
-      POSTGRES_PASSWORD: kenan123
+      - POSTGRES_DB=pubdb1
+      - POSTGRES_USER=pubdb1
+      - POSTGRES_PASSWORD=kenan123
+
     volumes:
       - ./../postgres_volumes:/var/lib/postgresql/data
 
